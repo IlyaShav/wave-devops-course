@@ -36,10 +36,8 @@ PART 3
 prerquisites:
 1.an ECR repository
 2.jenkins installed
-3.jenkins plugins:
-  Docker
-  Docker PipeLine
-4.docker installed
+3.jenkins plugins: Docker, Docker PipeLine
+4.Docker installed
 
 steps:
 1. enter your jenkins dashboard and choose a new item, pick a pipeline.
