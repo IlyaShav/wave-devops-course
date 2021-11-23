@@ -2,7 +2,7 @@ provider "helm" {
   kubernetes {                                                                                                     
     host                   = data.aws_eks_cluster.my-cluster.endpoint                                              
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.my-cluster.certificate_authority.0.data)            
-    config_path            = "~/infra/eks-cluster/kubeconfig_my-cluster"                                           
+    config_path            = "~/repotest-eks/part2/kubeconfig_my-cluster"                                           
   }                                                                                                                
 }                                                                                                                  
                                                                                                                    
