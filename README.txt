@@ -24,20 +24,23 @@ steps:
 PART 2
 prerquisites: 
 1.aws cli installed with full credentials.
-2.aws key pair for accessing provisioned instances.
-3.terraform v0.13.6 installed. 
+2.terraform v0.13.6 installed. 
 
 steps: 
-1. pull the files "main.tf" and "outputs.tf" from git into a directory and enter the command "terraform init"
-2. terraform will provision an EKS cluster with an ECR repository that we will need for part 3, the proccess should take 10-15 minutes to complete.
-3. after the cluster's creation we should see if we can connect to it and see the resources, enter the command "KUBECONFIG=./kubeconfig_my-cluster kubectl get nodes --all-            namespaces". this command grants us access to our provisioned cluster with the file named "kubeconfig_my-cluster".
+1. get the repo and enter the part 2 directory, terraform uses the AWS credentials file to authenticate into the account, please change the "shared_credentials_file" value to your file location and save the file, enter "terraform" init", then "terraform apply".
+2. terraform will provision an EKS cluster with an ECR repository and jenkins that we will need for part 3, the proccess should take 10-15 minutes to complete.
+3. after the cluster's creation we should see if we can connect to it and see the resources, enter the command "export KUBECONFIG=~/wave-devops-course/part2/kubeconfig_my-cluster" this command grants us access to our provisioned cluster with the file named "kubeconfig_my-cluster".
+4. enter "kubectl get pods" and "kubectl get svc" to see that jenkins is up.
+5. now we need a way to access jenkins for part 3, we will change the jenkins service configuration to LoadBalancer with the next command: 
+   kubectl patch svc jenkins -p '{"spec": {"type": "LoadBalancer"}}'
+6. enter "kubectl get svc", copy the lb address into the browser and append the port number 8080.
+
 
 PART 3
 prerquisites:
 1.an ECR repository
 2.jenkins installed
-3.jenkins plugins: Docker, Docker PipeLine
-4.Docker installed
+3.jenkins plugins: Docker, Docker PipeLine, Kubernetes, Kubernetes continuous deploy.
 
 steps:
 1. enter your jenkins dashboard and choose a new item, pick a pipeline.
