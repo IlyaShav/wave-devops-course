@@ -30,10 +30,9 @@ steps:
 1. get the repo and enter the part 2 directory, terraform uses the AWS credentials file to authenticate into the account, please change the "shared_credentials_file" value to your file location and save the file, enter "terraform" init", then "terraform apply".
 2. terraform will provision an EKS cluster with an ECR repository and jenkins that we will need for part 3, the proccess should take 10-15 minutes to complete.
 3. after the cluster's creation we should see if we can connect to it and see the resources, enter the command "export KUBECONFIG=~/wave-devops-course/part2/kubeconfig_my-cluster" this command grants us access to our provisioned cluster with the file named "kubeconfig_my-cluster".
-4. enter "kubectl get pods" and "kubectl get svc" to see that jenkins is up.
-5. now we need a way to access jenkins for part 3, we will change the jenkins service configuration to LoadBalancer with the next command: 
-   kubectl patch svc jenkins -p '{"spec": {"type": "LoadBalancer"}}'
-6. enter "kubectl get svc", copy the lb address into the browser and append the port number 8080.
+4. now enter "kubectl get nodes" to see that we have acceess.
+
+
 
 
 PART 3
@@ -43,12 +42,10 @@ prerquisites:
 3.jenkins plugins: Docker, Docker PipeLine, Kubernetes, Kubernetes continuous deploy.
 
 steps:
-1. enter your jenkins dashboard and choose a new item, pick a pipeline.
-2. scroll down to PipeLine and paste the JenkinsFile code in the repository to the script field below.
-3. substitute the environment variable's values in the pipeline with your values:
-   In place of “YOUR_ACCOUNT_ID_HERE” paste your AWS Account ID
-   In place of “CREATED_AWS_ECR_CONTAINER_REPO_REGION” copy created ECR repo region id
-   “IMAGE_REPO_NAME” set your ECR repository name (repo was created in part 2, use the name that was given)
-   “IMAGE_TAG” mention your desired tag
-4. let's take our .aws folder with all the credentials in it, copy it into the /var/lib/jenkins folder and change the owner of the files inside to jenkins using the following      command "sudo chown -R jenkins ./", jenkins should be able to read the credentials and access ecr.
-5.  run the pipeline and the image with the application should be in the ECR.
+1.
+2. enter your jenkins dashboard and choose a new item, pick a pipeline.
+3. scroll down to PipeLine and in the definition tab pick "pipeline script from SCM"
+4. in the repository tab copy and paste the repo :https://github.com/IlyaShav/wave-devops-course.git
+5. run the pipeline and the image with the application should be in the ECR.
+6. in the script path write "JenkinsFile"
+7. click on "build now", the docker image should be in the ecr in about 30 seconds.
