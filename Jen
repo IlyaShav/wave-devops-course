@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'examples/declarative_from_yaml_file/KubernetesPod.yaml'
+      yamlFile '/var/lib/jenkins/workspace/kubedeploy/part3/kube/knote.yaml'
     }
   }
   stages {
