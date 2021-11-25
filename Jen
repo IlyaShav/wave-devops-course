@@ -1,7 +1,14 @@
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'var/lib/jenkins/workspace/kubedeploy/wave-devops-course/part3/kube/knote.yaml'
+      yamlFile 'examples/declarative_from_yaml_file/KubernetesPod.yaml'
+    }
+  }
+  stages {
+    stage('Run maven') {
+      steps {
+        sh 'pwd'
+      }
     }
   }
 }
