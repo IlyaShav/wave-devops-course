@@ -1,7 +1,7 @@
 pipeline {
   agent {
     kubernetes {
-      yamlFile 'ddd/part3/kube/knote.yaml'
+      yamlFile 'part3/kube/knote.yaml'
     }
   }
   stages {
