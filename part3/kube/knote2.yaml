@@ -1,18 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Pod
 metadata:
   name: knote
+  labels:
+    name: knote
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: knote
-  template:
-    metadata:
-      labels:
-        app: knote
-    spec:
-      containers:
+  containers:
         - name: knote
           image: 361435822559.dkr.ecr.us-east-1.amazonaws.com/my_apps:knoteapp
           ports:
