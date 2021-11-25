@@ -1,0 +1,7 @@
+pipeline {
+  agent {
+    kubernetes {
+      yamlFile 'var/lib/jenkins/workspace/kubedeploy/wave-devops-course/part3/kube/knote.yaml'
+    }
+  }
+}
